@@ -20,7 +20,7 @@ class PortfolioForm
                 FileUpload::make('image_path')
                     ->image()
                     ->disk('public')
-                    ->directory('images')
+                    ->directory('portfolio')
                     ->required()
                     ->visibility('public')
             ]);

@@ -15,6 +15,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Image;
 use Filament\Schemas\Schema;
@@ -46,7 +47,9 @@ class PortfolioResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('title'),
                 TextColumn::make('description')->wrap(),
-                ImageColumn::make('image_path')->circular(),
+                ImageColumn::make('image_path')
+                    ->disk('public')
+                    ->circular(),
             ])
             ->filters([])
             ->recordActions([
@@ -64,7 +67,7 @@ class PortfolioResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ImagesRelationManager::class
         ];
     }
 

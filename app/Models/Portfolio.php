@@ -17,4 +17,9 @@ class Portfolio extends Model
         'description',
         'image_path'
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Images::class);
+    }
 }

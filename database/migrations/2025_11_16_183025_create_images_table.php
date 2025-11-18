@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('portfolio_id')
                 ->references('id')->on('portfolio')
                 ->onDelete('cascade');
+            $table->date('deleted_at')->nullable();
 
             $table->timestamps();
         });

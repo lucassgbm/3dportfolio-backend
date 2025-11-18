@@ -10,9 +10,15 @@ use App\Filament\Resources\Images\Tables\ImagesTable;
 use App\Models\Images;
 use BackedEnum;
 use Dom\Text;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -34,9 +40,26 @@ class ImagesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('name'),
-                TextColumn::make('image_path'),
-            ]);
+                TextColumn::make('name')
+                    ->label('Título'),
+                ImageColumn::make('image_path')
+                    ->disk('public')
+                    ->label('Imagem')
+                    ->imageHeight(50)
+                    ->circular(),
+
+            ])
+            ->filters([])
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ])
+            ])
+            ;
     }
 
     public static function getRelations(): array
