@@ -9,3 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/portfolio', [PortfolioController::class, 'index']);
+
+Route::get('/portfolio/{id}', [PortfolioController::class, 'show']);

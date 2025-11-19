@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PortfolioImagesResource;
 use App\Http\Resources\PortfolioResource;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class PortfolioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return new PortfolioImagesResource(Portfolio::find($id));
     }
 
     /**
